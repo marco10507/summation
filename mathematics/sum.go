@@ -1,4 +1,4 @@
-package sum2
+package mathematics
 
 import "runtime"
 
@@ -7,7 +7,19 @@ type chunck struct {
 	end   int
 }
 
-func Sum(items []float64) float64 {
+//Sum1 the summation is carried out by using a plain loop
+func Sum1(items []float64) float64 {
+	var sum float64
+
+	for _, item := range items {
+		sum += item
+	}
+
+	return sum
+}
+
+//Sum2 The summation is carried out by using Go routines and all available cores
+func Sum2(items []float64) float64 {
 	chunks, _ := createChunks(len(items), runtime.NumCPU())
 
 	inputChanel := createPipeline(chunks)
